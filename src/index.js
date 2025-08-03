@@ -17,8 +17,8 @@ function displayWeather(response) {
 
 function search(event) {
   event.preventDefault();
-  let searchInputElement = document.querySelector("#search-form-input");
-  let city = searchInputElement.value;
+  let searchInput = document.querySelector("#search-form-input");
+  let city = searchInput.value;
 
   let apiKey = "1t58d76239ab654fd09eabc4co0daf97";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
