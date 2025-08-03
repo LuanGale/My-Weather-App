@@ -2,6 +2,15 @@ body {
   background-color: #fcebe2;
   font-family: "Roboto", sans-serif;
 }
+
+header {
+  border-bottom: 1px solid #fcebe2;
+  padding: 0 0 30px 0;
+}
+a {
+  color: #ff8a4f;
+}
+
 .weather-app-content {
   background: white;
   max-width: 600px;
@@ -29,4 +38,12 @@ body {
   width: 15%;
   font-size: 16px;
   padding: 10px 20px;
+}
+
+footer {
+  border-top: 1px solid #fcebe2;
+  padding: 30px 0 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
 }
