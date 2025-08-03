@@ -6,6 +6,8 @@ function displayWeather(response) {
   let iconElement = document.querySelector("#current-temperature-icon");
   let humidityElement = document.querySelector("#humidity");
   let speedElement = document.querySelector("#wind-speed");
+  let timeElement = document.querySelector("#current-date");
+  let date = new Date(response.data.time * 1000);
 
   cityElement.innerHTML = response.data.city;
   temperatureElement.innerHTML = temperature;
@@ -13,6 +15,7 @@ function displayWeather(response) {
   iconElement.innerHTML = `<img src ="${response.data.condition.icon_url}" />`;
   humidityElement.innerHTML = response.data.temperature.humidity;
   speedElement.innerHTML = Math.round(response.data.wind.speed * 10) / 10;
+  timeElement.innerHTML = formatedate;
 }
 
 function searchCity(city) {
@@ -29,9 +32,8 @@ function handleSearchSubmit(event) {
 }
 
 function formatDate(date) {
-  let minutes = date.getMinutes();
   let hours = date.getHours();
-  let day = date.getDay();
+  let minutes = date.getMinutes();
 
   if (minutes < 10) {
     minutes = `0${minutes}`;
@@ -50,9 +52,9 @@ function formatDate(date) {
     "Friday",
     "Saturday",
   ];
+  let day = days[date.getDay()];
 
-  let formattedDay = days[day];
-  return `${formattedDay} ${hours}:${minutes}`;
+  return `${day} ${hours}:${minutes}`;
 }
 
 let searchForm = document.querySelector("#search-form");
