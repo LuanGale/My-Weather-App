@@ -6,6 +6,33 @@
     <title>My Weather App</title>
   </head>
   <body>
+    <header>
+      <form>
+        <input type="search" placeholder="Enter a city..." required />
+        <input type="submit" value="Search" />
+      </form>
+    </header>
+
+    <main>
+      <div class="weather-description">
+        <h1>Palma</h1>
+        <p>
+          <span id="current-date">Monday 00:00</span>,
+          <span id="description">sunny</span>
+          <br />
+          Humidity: <strong><span id="humidity">60</span>%</strong>, Wind:
+          <strong><span id="wind-speed">0.73</span> km/h</strong>
+        </p>
+      </div>
+      <div class="current-temperature">
+        <span class="current-temperature-icon" id="current-temperature-icon"
+          >☀️</span
+        ><span class="current-temperature-value" id="current-temperature-value"
+          >24</span
+        ><span class="current-temperature-unit">°C</span>
+      </div>
+    </main>
+
     <footer>
       <p>
         Coded by
