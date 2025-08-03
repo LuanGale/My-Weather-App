@@ -15,15 +15,17 @@ function displayWeather(response) {
   speedElement.innerHTML = Math.round(response.data.wind.speed * 10) / 10;
 }
 
-function search(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-form-input");
-  let city = searchInput.value;
-
+function searchCity(city) {
   let apiKey = "1t58d76239ab654fd09eabc4co0daf97";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-
   axios.get(apiUrl).then(displayWeather);
+}
+
+function handleSearchSubmit(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-form-input");
+
+  searchCity(searchInput.value);
 }
 
 function formatDate(date) {
@@ -54,9 +56,11 @@ function formatDate(date) {
 }
 
 let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", search);
+searchForm.addEventListener("submit", handleSearchSubmit);
 
 let currentDateELement = document.querySelector("#current-date");
 let currentDate = new Date();
 
 currentDateELement.innerHTML = formatDate(currentDate);
+
+searchCity("Palma");
