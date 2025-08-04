@@ -61,3 +61,28 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Palma");
+
+function displayForecast() {
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+    <div class="weather-forecast-day">
+        <div class="weather-forecast-date"><strong>${day}</strong></div>
+        <div class="weather-forecast-icon">🌥️</div>
+        <div class="weather-forecast-temperatures">
+            <span class="max-temperature"> <strong>10º</strong></span>
+            <span class="min-temperature">8º</span>
+        </div>
+    </div>
+  `;
+  });
+
+  let forecastElement = document.querySelector("#weather-forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
+
+displayForecast();
