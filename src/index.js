@@ -21,8 +21,8 @@ function displayWeather(response) {
 }
 
 function formatDate(date) {
-  let hours = date.getHours();
   let minutes = date.getMinutes();
+  let hours = date.getHours();
 
   if (minutes < 10) {
     minutes = `0${minutes}`;
@@ -62,6 +62,13 @@ function handleSearchSubmit(event) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearchSubmit);
 
+function formatDays(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[date.getDay()];
+}
+
 function getForecastData(city) {
   let apiKey = "1t58d76239ab654fd09eabc4co0daf97";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
@@ -69,22 +76,35 @@ function getForecastData(city) {
 }
 
 function displayForecast(response) {
-  let days = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let forecastHtml = "";
 
-  days.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      `
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHtml =
+        forecastHtml +
+        `
     <div class="weather-forecast-day">
-        <div class="weather-forecast-date"><strong>${day}</strong></div>
-        <div class="weather-forecast-icon">🌥️</div>
+        <div class="weather-forecast-date"><strong>${formatDays(
+          day.time
+        )}</strong></div>
+        <div>
+        <img src ="${day.condition.icon_url}" alt="${
+          day.condition.icon
+        }" class="weather-forecast-icon" />
+        </div>
         <div class="weather-forecast-temperatures">
-            <span class="max-temperature"> <strong>10º</strong></span>
-            <span class="min-temperature">8º</span>
+            <span class="max-temperature"> 
+            <strong>
+            ${Math.round(day.temperature.maximum)}º
+            </strong>
+            </span>
+            <span class="min-temperature">
+            ${Math.round(day.temperature.minimum)}º
+            </span>
         </div>
     </div>
   `;
+    }
   });
 
   let forecastElement = document.querySelector("#weather-forecast");
@@ -92,5 +112,3 @@ function displayForecast(response) {
 }
 
 searchCity("Palma");
-
-displayForecast();
