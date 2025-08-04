@@ -16,6 +16,8 @@ function displayWeather(response) {
   humidityElement.innerHTML = response.data.temperature.humidity;
   speedElement.innerHTML = Math.round(response.data.wind.speed * 10) / 10;
   timeElement.innerHTML = formatDate(date);
+
+  getForecastData(response.data.city);
 }
 
 function formatDate(date) {
@@ -60,9 +62,13 @@ function handleSearchSubmit(event) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearchSubmit);
 
-searchCity("Palma");
+function getForecastData(city) {
+  let apiKey = "1t58d76239ab654fd09eabc4co0daf97";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
 
-function displayForecast() {
+function displayForecast(response) {
   let days = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let forecastHtml = "";
 
@@ -84,5 +90,7 @@ function displayForecast() {
   let forecastElement = document.querySelector("#weather-forecast");
   forecastElement.innerHTML = forecastHtml;
 }
+
+searchCity("Palma");
 
 displayForecast();
